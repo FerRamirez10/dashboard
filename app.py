@@ -175,7 +175,7 @@ def obtener_prediccion(n_clicks, fecha):
     if n_clicks > 0 and fecha:
         try:
             payload = {"fechas": [fecha]}
-            response = requests.post("https://<NOMBRE_BACKEND>.up.railway.app/predict", json=payload)
+            response = requests.post("https://analitica-production.up.railway.app/predict", json=payload)
             if response.status_code == 200:
                 data = response.json()
                 pred = data.get("predicciones", [None])[0]
@@ -205,8 +205,8 @@ def obtener_prediccion(n_clicks, fecha):
 )
 def cargar_datos(n_clicks):
     try:
-        forecast_response = requests.post("http://127.0.0.1:8000/predict", json={"fechas": pd.date_range(min_date, max_date, freq='MS').strftime("%Y-%m-%d").tolist()})
-        stats_response = requests.get("http://127.0.0.1:8000/estadisticas")
+        forecast_response = requests.post("https://analitica-production.up.railway.app/predict", json={"fechas": pd.date_range(min_date, max_date, freq='MS').strftime("%Y-%m-%d").tolist()})
+        stats_response = requests.get("https://analitica-production.up.railway.app/estadisticas")
 
         forecast = pd.DataFrame(forecast_response.json()['predicciones'])
         stats = pd.DataFrame(stats_response.json())
