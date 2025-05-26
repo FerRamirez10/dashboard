@@ -272,7 +272,10 @@ def cargar_datos(n_clicks):
         return {}, f"❌ Error al cargar datos: {str(e)}", {}, ""
 
 # Ejecutar
+import os
+
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get("PORT", 8050))  # usa el puerto de Railway
-    app.run(host='0.0.0.0', port=port, debug=True)
+    port = int(os.environ.get("PORT", 8080))
+    print("🚀 Iniciando app en Railway")
+    app.run_server(host='0.0.0.0', port=port, debug=True)
+
